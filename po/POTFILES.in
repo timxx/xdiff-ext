@@ -1,0 +1,11 @@
+# List of source files containing translatable strings.
+
+# Source files
+diff-ext/src/main.c
+data/xdiff-ext.desktop.in
+preferences/preferences.c
+setup/src/callbacks.c
+setup/src/interface.c
+setup/src/setup.glade
+setup/src/support.c
+

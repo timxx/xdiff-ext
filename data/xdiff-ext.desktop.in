@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Encoding=UTF-8
+_Name=xdiff-ext configuration
+_Comment=Configure xdiff-ext thunar extension
+Exec=xdiffextsetup
+Icon=de
+Categories=Application;FileManager;DesktopSettings;Settings;AdvancedSettings;
