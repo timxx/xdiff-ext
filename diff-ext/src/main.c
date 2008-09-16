@@ -15,16 +15,18 @@
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif
-
+#include <glib/gqueue.h>
 #include <exo/exo.h>
 
 #include <thunarx/thunarx.h>
 
 #include <preferences.h>
 
+#include "submenu-action.h"
+
 static GType type_list[1];
 
-static GString* saved = 0;
+static GQueue* _saved = 0;
 
 typedef struct _DIFF_EXT {
   GObject object;
@@ -87,25 +89,44 @@ diff3(gchar* f1, gchar* f2, gchar* f3) {
 }
 
 void
+clear_queue(GQueue* queue) {
+  while(!g_queue_is_empty(queue)) {
+    g_queue_pop_head(queue);
+  }
+}
+
+void
 compare_later(GtkAction* action, GtkWidget* window) {
   GList* files = g_list_first((GList*)g_object_get_data(G_OBJECT(action), "xdiff-ext::save"));
-  gchar* uri;
-  gchar* path;
     
-  uri = thunarx_file_info_get_uri((ThunarxFileInfo*)files->data);
-  path = g_filename_from_uri(uri, NULL, NULL);
-  g_free(uri);
-  
-  g_string_assign(saved, path);
-  
-  // g_free(path) ???
+  while(files) {
+    gchar* uri;
+    gchar* path;
+    GList* link;
+
+    uri = thunarx_file_info_get_uri((ThunarxFileInfo*)files->data);
+    path = g_filename_from_uri(uri, NULL, NULL);
+    g_free(uri);
+    
+    link = g_queue_find_custom(_saved, path, (GCompareFunc)strcmp);
+    
+    if(link == NULL) {
+      g_queue_push_head(_saved, path);
+    } else {
+      g_queue_unlink(_saved, link);
+      g_queue_push_head_link(_saved, link);
+    }
+    // g_free(path) ???
+    files = g_list_next(files);
+  }
 }
 
 void
 compare_to(GtkAction* action, GtkWidget* window) {
   GList* files = g_list_first((GList*)g_object_get_data(G_OBJECT(action), "xdiff-ext::compare_to"));
+  GList* saved = (GList*)g_object_get_data(G_OBJECT(action), "xdiff-ext::saved");
   gchar* f1 = 0;
-  gchar* f2 = saved->str;
+  gchar* f2 = (gchar*)saved->data;
   gboolean keep_file = FALSE;
   gchar* uri;
   xdiff_ext_preferences* p = xdiff_ext_preferences_instance();
@@ -121,16 +142,18 @@ compare_to(GtkAction* action, GtkWidget* window) {
   diff(f1, f2);
 
   if(!keep_file) {
-    saved = g_string_assign(saved, "");
+//    g_queue_delete_link(_saved, saved);
+    clear_queue(_saved);
   }
 }
 
 void
 compare3_to(GtkAction* action, GtkWidget* window) {
   GList* files = g_list_first((GList*)g_object_get_data(G_OBJECT(action), "xdiff-ext::compare3_to"));
+  GList* saved = (GList*)g_object_get_data(G_OBJECT(action), "xdiff-ext::saved");
   gchar* f1 = 0;
   gchar* f2 = 0;
-  gchar* f3 = saved->str;
+  gchar* f3 = (gchar*)saved->data;
   gboolean keep_file = FALSE;
   gchar* uri;
   xdiff_ext_preferences* p = xdiff_ext_preferences_instance();
@@ -150,7 +173,8 @@ compare3_to(GtkAction* action, GtkWidget* window) {
   diff3(f1, f2, f3);
 
   if(!keep_file) {
-    saved = g_string_assign(saved, "");
+//    g_queue_delete_link(_saved, saved);
+    clear_queue(_saved);
   }
 }
 
@@ -197,6 +221,10 @@ compare3(GtkAction* action, GtkWidget* window) {
 }
 
 
+void
+clear(GtkAction* action, GtkWidget* window) {
+  clear_queue(_saved);
+}
 
 static void
 diff_ext_class_init(DIFF_EXT_CLASS* klass)
@@ -221,12 +249,10 @@ menu_provider_init(ThunarxMenuProviderIface* iface) {
   g_object_ref(iface);
 }
 
-
-
 static GList*
 get_file_actions(ThunarxMenuProvider* provider, GtkWidget* window, GList* files) {
   GList* actions = 0;
-	
+  
   if(files != 0) {
     guint n = g_list_length(files);
     gchar* three_way_compare_command;
@@ -236,89 +262,158 @@ get_file_actions(ThunarxMenuProvider* provider, GtkWidget* window, GList* files)
 
     g_object_unref(p);
      
-    if(n <= 3) {
-      GList* scan = files;
-      gboolean go = TRUE;
-      
-      while(scan && go) {
-        gchar* scheme;
+    GList* scan = files;
+    gboolean go = TRUE;
+    
+    while(scan && go) {
+      gchar* scheme;
 
-        scheme = thunarx_file_info_get_uri_scheme((ThunarxFileInfo*)(scan->data));
-        go = strncmp(scheme, "file", 4) == 0;
-        g_free(scheme);
-        
-        scan = g_list_next(scan);
-      }
+      scheme = thunarx_file_info_get_uri_scheme((ThunarxFileInfo*)(scan->data));
+      go = strncmp(scheme, "file", 4) == 0;
+      g_free(scheme);
       
-      if(go) {
-        if(n == 1) {
-          GtkAction* action = gtk_action_new("xdiff-ext::save", _("Compare later"), _("Select file for comparison"), NULL);
-          g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare_later), window);
-          g_object_set_data_full(G_OBJECT(action), "xdiff-ext::save", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+      scan = g_list_next(scan);
+    }
+    
+    if(go) {
+      GtkAction* action = gtk_action_new("xdiff-ext::save", _("Compare later"), _("Select file for comparison"), NULL);
+      g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare_later), window);
+      g_object_set_data_full(G_OBJECT(action), "xdiff-ext::save", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+      actions = g_list_append(actions, action);
+      
+      if(n == 1) {
+        if(!g_queue_is_empty(_saved)) {
+          GString* caption = g_string_new("");
+          GString* hint = g_string_new("");
+          GList* head = g_queue_peek_head_link(_saved);
+          gchar* head_file = (gchar*)head->data;
+          
+          gchar* uri;
+          gchar* path;
+
+          uri = thunarx_file_info_get_uri((ThunarxFileInfo*)files->data);
+          path = g_filename_from_uri(uri, NULL, NULL);
+          g_free(uri);
+          
+          g_string_printf(caption,_("Compare to '%s'"), head_file);
+          g_string_printf(hint, _("Compare '%s' and '%s'"), path, head_file);
+          
+          action = gtk_action_new("xdiff-ext::compare_to", caption->str, hint->str, NULL);
+          g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare_to), window);
+          g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare_to", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+          g_object_set_data(G_OBJECT(action), "xdiff-ext::saved", head);
           actions = g_list_append(actions, action);
           
-          if(strcmp("", saved->str) != 0) {
+          if(_saved->length > 1) {
+            xdiff_ext_submenu_action* submenu;
+            GString* name = g_string_new("");
+            int n = 1;
+            
+            submenu = xdiff_ext_submenu_action_new("xdiff-ext::compare_to_menu", "Compare to", "", NULL);
+            actions = g_list_append(actions, submenu);
+
+            while(head) {
+              head_file = (gchar*)head->data;
+              g_string_printf(name, "xdiff-ext::compare_to_%d", n);
+              g_string_printf(hint, _("Compare '%s' and '%s'"), path, head_file);
+              
+              action = gtk_action_new(name->str, head_file, hint->str, NULL);
+              g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare_to), window);
+              g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare_to", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+              g_object_set_data(G_OBJECT(action), "xdiff-ext::saved", head);
+              xdiff_ext_submenu_action_add(submenu, action);
+              
+              head = g_list_next(head);
+              n++;
+            }
+            
+            xdiff_ext_submenu_action_add(submenu, NULL);
+            
+            action = gtk_action_new("xdiff-ext::clear", "Clear", "Clear selected files list", NULL);
+            g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(clear), window);
+            xdiff_ext_submenu_action_add(submenu, action);
+            
+            g_string_free(name, TRUE);
+          }
+          
+          g_string_free(caption, TRUE);
+          g_string_free(hint, TRUE);
+        }
+      } else if(n == 2) {
+        GtkAction* action = gtk_action_new("xdiff-ext::compare", _("Compare"), _("Compare selected files"), NULL);
+        g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare), window);
+        g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+        actions = g_list_append(actions, action);
+
+        if(strcmp("", three_way_compare_command) != 0) {
+          if(!g_queue_is_empty(_saved)) {
             GString* caption = g_string_new("");
             GString* hint = g_string_new("");
+            GList* head = g_queue_peek_head_link(_saved);
+            gchar* head_file = (gchar*)head->data;
             gchar* uri;
-            gchar* path;
+            gchar* path1;
+            gchar* path2;
 
             uri = thunarx_file_info_get_uri((ThunarxFileInfo*)files->data);
-            path = g_filename_from_uri(uri, NULL, NULL);
+            path1 = g_filename_from_uri(uri, NULL, NULL);
+            g_free(uri);
+            files = g_list_next(files);
+            uri = thunarx_file_info_get_uri((ThunarxFileInfo*)files->data);
+            path2 = g_filename_from_uri(uri, NULL, NULL);
             g_free(uri);
             
-            g_string_printf(caption,_("Compare to '%s'"), saved->str);
-            g_string_printf(hint, _("Compare '%s' and '%s'"), path, saved->str);
+            g_string_printf(caption, _("3-way compare to '%s'"), head_file);
+            g_string_printf(hint, _("3-way compare '%s', '%s' and '%s'"), path1, path2, head_file);
             
-            action = gtk_action_new("xdiff-ext::compare_to", caption->str, hint->str, NULL);
-            g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare_to), window);
-            g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare_to", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+            action = gtk_action_new("xdiff-ext::compare3_to", caption->str, hint->str, NULL);
+            g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare3_to), window);
+            g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare3_to", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+            g_object_set_data(G_OBJECT(action), "xdiff-ext::saved", head);
             actions = g_list_append(actions, action);
+
+            if(_saved->length > 1) {
+              xdiff_ext_submenu_action* submenu;
+              GString* name = g_string_new("");
+              int n = 1;
+              
+              submenu = xdiff_ext_submenu_action_new("xdiff-ext::compare_to_menu", "3-way compare to", "", NULL);
+              actions = g_list_append(actions, submenu);
+
+              while(head) {
+                head_file = (gchar*)head->data;
+                g_string_printf(name, "xdiff-ext::comparae3_to_%d", n);
+                g_string_printf(hint, _("3-way compare '%s', '%s' and '%s'"), path1, path2, head_file);
+                
+                action = gtk_action_new(name->str, head_file, hint->str, NULL);
+                g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare3_to), window);
+                g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare3_to", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+                g_object_set_data(G_OBJECT(action), "xdiff-ext::saved", head);
+                xdiff_ext_submenu_action_add(submenu, action);
+                
+                head = g_list_next(head);
+                n++;
+              }
+              
+              xdiff_ext_submenu_action_add(submenu, NULL);
+              
+              action = gtk_action_new("xdiff-ext::clear", "Clear", "Clear selected files list", NULL);
+              g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(clear), window);
+              xdiff_ext_submenu_action_add(submenu, action);
+              
+              g_string_free(name, TRUE);
+            }
             
             g_string_free(caption, TRUE);
             g_string_free(hint, TRUE);
           }
-        } else if(n == 2) {
-          GtkAction* action = gtk_action_new("xdiff-ext::compare", _("Compare"), _("Compare selected files"), NULL);
-          g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare), window);
-          g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
+        }
+      } else if(n == 3) {
+        if(strcmp("", three_way_compare_command) != 0) {
+          GtkAction* action = gtk_action_new("xdiff-ext::compare3", _("3-way Compare"), _("Compare selected files"), NULL);
+          g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare3), window);
+          g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare3", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
           actions = g_list_append(actions, action);
-
-          if(strcmp("", three_way_compare_command) != 0) {
-            if(strcmp("", saved->str) != 0) {
-              GString* caption = g_string_new("");
-              GString* hint = g_string_new("");
-              gchar* uri;
-              gchar* path1;
-              gchar* path2;
-
-              uri = thunarx_file_info_get_uri((ThunarxFileInfo*)files->data);
-              path1 = g_filename_from_uri(uri, NULL, NULL);
-              g_free(uri);
-              files = g_list_next(files);
-              uri = thunarx_file_info_get_uri((ThunarxFileInfo*)files->data);
-              path2 = g_filename_from_uri(uri, NULL, NULL);
-              g_free(uri);
-              
-              g_string_printf(caption, _("3-way compare to '%s'"), saved->str);
-              g_string_printf(hint, _("3-way compare '%s', '%s' and '%s'"), path1, path2, saved->str);
-              
-              action = gtk_action_new("xdiff-ext::compare3_to", caption->str, hint->str, NULL);
-              g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare3_to), window);
-              g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare3_to", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
-              actions = g_list_append(actions, action);
-              
-              g_string_free(caption, TRUE);
-              g_string_free(hint, TRUE);
-            }
-          }
-        } else if(n == 3) {
-          if(strcmp("", three_way_compare_command) != 0) {
-            GtkAction* action = gtk_action_new("xdiff-ext::compare3", _("3-way Compare"), _("Compare selected files"), NULL);
-            g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare3), window);
-            g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare3", thunarx_file_info_list_copy(files),(GDestroyNotify)thunarx_file_info_list_free);
-            actions = g_list_append(actions, action);
-          }
         }
       }
     }
@@ -344,9 +439,11 @@ get_folder_actions(ThunarxMenuProvider* provider, GtkWidget* window, ThunarxFile
     g_object_set_data_full(G_OBJECT(action), "xdiff-ext::save", thunarx_file_info_list_copy(files), (GDestroyNotify)thunarx_file_info_list_free);
     actions = g_list_append(actions, action);
     
-    if(strcmp("", saved->str) != 0) {
+    if(!g_queue_is_empty(_saved)) {
       GString* caption = g_string_new("");
       GString* hint = g_string_new("");
+      GList* head = g_queue_peek_head_link(_saved);
+      gchar* head_file = (gchar*)head->data;
       gchar* uri;
       gchar* path;
 
@@ -354,12 +451,13 @@ get_folder_actions(ThunarxMenuProvider* provider, GtkWidget* window, ThunarxFile
       path = g_filename_from_uri(uri, NULL, NULL);
       g_free(uri);
       
-      g_string_printf(caption, _("Compare to '%s'"), saved->str);
-      g_string_printf(hint, _("Compare '%s' and '%s'"), path, saved->str);
+      g_string_printf(caption, _("Compare to '%s'"), head_file);
+      g_string_printf(hint, _("Compare '%s' and '%s'"), path, head_file);
       
       action = gtk_action_new("xdiff-ext::compare_to", caption->str, hint->str, NULL);
       g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(compare_to), window);
       g_object_set_data_full(G_OBJECT(action), "xdiff-ext::compare_to", thunarx_file_info_list_copy(files), (GDestroyNotify)thunarx_file_info_list_free);
+      g_object_set_data(G_OBJECT(action), "xdiff-ext::saved", head);
       actions = g_list_append(actions, action);
       
       g_string_free(caption, TRUE);
@@ -397,8 +495,8 @@ thunar_extension_initialize(ThunarxProviderPlugin* plugin) {
 
     /* setup the plugin type list */
     type_list[0] = diff_ext_get_type();
-    saved = g_string_new("");
-    
+    _saved = g_queue_new();
+
     thunarx_provider_plugin_set_resident(plugin, TRUE);
   } else {
     g_warning("Version mismatch: %s", mismatch);

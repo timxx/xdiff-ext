@@ -8,7 +8,7 @@ INCLUDES = \
 
 AM_CFLAGS =-Wall -g
 
-libxdiff_ext_la_SOURCES = main.c
+libxdiff_ext_la_SOURCES = main.c submenu-action.c submenu-action.h
 
 lib_LTLIBRARIES = libxdiff-ext.la
 
@@ -16,7 +16,7 @@ libxdiff_ext_la_LDFLAGS = -module -avoid-version
 
 libxdiff_ext_la_LIBADD = -L$(top_builddir)/preferences -lpreferences
 
-EXTRA_libxdiff_ext_la_SOURCES = main.c
+#EXTRA_libxdiff_ext_la_SOURCES = main.c
 
 #libxdiff_ext_la_LIBADD = @MENU@
 #libxdiff_ext_la_DEPENDENCIES = @MENU@
