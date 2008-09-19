@@ -19700,7 +19700,7 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-ALL_LINGUAS="ru uk da"
+ALL_LINGUAS="ru uk"
 
 
 for ac_header in locale.h
