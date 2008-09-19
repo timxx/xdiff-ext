@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-10 22:15-0400\n"
+"POT-Creation-Date: 2008-09-18 18:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,56 +16,44 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../diff-ext/src/main.c:251
-msgid "a1"
-msgstr ""
-
-#: ../diff-ext/src/main.c:255
-msgid "a2"
-msgstr ""
-
-#: ../diff-ext/src/main.c:259
-msgid "a3"
-msgstr ""
-
-#: ../diff-ext/src/main.c:289 ../diff-ext/src/main.c:399
+#: ../diff-ext/src/main.c:293 ../diff-ext/src/main.c:476
 msgid "Compare later"
 msgstr ""
 
-#: ../diff-ext/src/main.c:289 ../diff-ext/src/main.c:399
+#: ../diff-ext/src/main.c:293 ../diff-ext/src/main.c:476
 msgid "Select file for comparison"
 msgstr ""
 
-#: ../diff-ext/src/main.c:307 ../diff-ext/src/main.c:416
+#: ../diff-ext/src/main.c:315 ../diff-ext/src/main.c:493
 #, c-format
 msgid "Compare to '%s'"
 msgstr ""
 
-#: ../diff-ext/src/main.c:308 ../diff-ext/src/main.c:320
-#: ../diff-ext/src/main.c:417
+#: ../diff-ext/src/main.c:316 ../diff-ext/src/main.c:357
+#: ../diff-ext/src/main.c:494
 #, c-format
 msgid "Compare '%s' and '%s'"
 msgstr ""
 
-#: ../diff-ext/src/main.c:336
+#: ../diff-ext/src/main.c:382
 msgid "Compare"
 msgstr ""
 
-#: ../diff-ext/src/main.c:336 ../diff-ext/src/main.c:374
+#: ../diff-ext/src/main.c:382 ../diff-ext/src/main.c:452
 msgid "Compare selected files"
 msgstr ""
 
-#: ../diff-ext/src/main.c:359
+#: ../diff-ext/src/main.c:405
 #, c-format
 msgid "3-way compare to '%s'"
 msgstr ""
 
-#: ../diff-ext/src/main.c:360
+#: ../diff-ext/src/main.c:406 ../diff-ext/src/main.c:425
 #, c-format
 msgid "3-way compare '%s', '%s' and '%s'"
 msgstr ""
 
-#: ../diff-ext/src/main.c:374
+#: ../diff-ext/src/main.c:452
 msgid "3-way Compare"
 msgstr ""
 

@@ -19441,7 +19441,7 @@ fi
 
 
 
-pkg_modules="thunarx-1 >= 0.9 exo-0.3 >= 0.3.4 gtk+-2.0 >= 2.0.0"
+pkg_modules="thunar-vfs-1 >= 0.9 thunarx-1 >= 0.9 exo-0.3 >= 0.3.4 gtk+-2.0 >= 2.0.0"
 
 pkg_failed=no
 echo "$as_me:$LINENO: checking for DIFF_EXT" >&5
@@ -19700,7 +19700,7 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-ALL_LINGUAS="ru"
+ALL_LINGUAS="ru uk da"
 
 
 for ac_header in locale.h

@@ -18,7 +18,7 @@ PKG_CHECK_MODULES(PREFERENCES, [$pkg_modules])
 AC_SUBST(PREFERENCES_CFLAGS)
 AC_SUBST(PREFERENCES_LIBS)
 
-pkg_modules="thunarx-1 >= 0.9 exo-0.3 >= 0.3.4 gtk+-2.0 >= 2.0.0"
+pkg_modules="thunar-vfs-1 >= 0.9 thunarx-1 >= 0.9 exo-0.3 >= 0.3.4 gtk+-2.0 >= 2.0.0"
 PKG_CHECK_MODULES(DIFF_EXT, [$pkg_modules])
 AC_SUBST(DIFF_EXT_CFLAGS)
 AC_SUBST(DIFF_EXT_LIBS)
@@ -36,7 +36,7 @@ GETTEXT_PACKAGE=xdiff-ext
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 
-ALL_LINGUAS="ru"
+ALL_LINGUAS="ru uk da"
 AM_GLIB_GNU_GETTEXT
 
 diff_extlocaledir='${prefix}/${DATADIRNAME}/locale'

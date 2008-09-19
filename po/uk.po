@@ -1,4 +1,4 @@
-# Russian translation for xdiff-ext.
+# Ukrainian translation for xdiff-ext.
 # Copyright (C) 2008 Sergey Zorin
 # This file is distributed under the same license as the xdiff-ext package.
 # Sergey Zorin<szorin@comcast.net>, 2008.
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-17 10:39-0400\n"
-"PO-Revision-Date: 2008-09-17 10:33+EST\n"
+"POT-Creation-Date: 2008-09-17 10:41-0400\n"
+"PO-Revision-Date: 2008-09-17 10:24+EST\n"
 "Last-Translator: Sergey Zorin<szorin@comcast.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,44 +18,44 @@ msgstr ""
 
 #: ../diff-ext/src/main.c:281 ../diff-ext/src/main.c:464
 msgid "Compare later"
-msgstr "Сравнить позже"
+msgstr "Порівняти пізніше"
 
 #: ../diff-ext/src/main.c:281 ../diff-ext/src/main.c:464
 msgid "Select file for comparison"
-msgstr "Выбрать файл для последующего сравнения"
+msgstr "Запам'ятати файл(и) для подальшого порівняння."
 
 #: ../diff-ext/src/main.c:303 ../diff-ext/src/main.c:481
 #, c-format
 msgid "Compare to '%s'"
-msgstr "Сравнить с '%s'"
+msgstr "Порівняти з '%s'"
 
 #: ../diff-ext/src/main.c:304 ../diff-ext/src/main.c:345
 #: ../diff-ext/src/main.c:482
 #, c-format
 msgid "Compare '%s' and '%s'"
-msgstr "Сравнить '%s' и '%s"
+msgstr "Порівняти '%s' з '%s"
 
 #: ../diff-ext/src/main.c:370
 msgid "Compare"
-msgstr "Сравнить"
+msgstr "Порівняти"
 
 #: ../diff-ext/src/main.c:370 ../diff-ext/src/main.c:440
 msgid "Compare selected files"
-msgstr "Сравнить выбранные файлы"
+msgstr "Порівняти вибрані файли."
 
 #: ../diff-ext/src/main.c:393
 #, c-format
 msgid "3-way compare to '%s'"
-msgstr "Трех-стороннее сравнение с '%s'"
+msgstr "Тристороннє порівняння з '%s'"
 
 #: ../diff-ext/src/main.c:394 ../diff-ext/src/main.c:413
 #, c-format
 msgid "3-way compare '%s', '%s' and '%s'"
-msgstr "Трех-стороннее сравнение '%s', '%s' и '%s'"
+msgstr "Тристороннє порівняння '%s', '%s'  і '%s'"
 
 #: ../diff-ext/src/main.c:440
 msgid "3-way Compare"
-msgstr "Трех-стороннее сравнение"
+msgstr "Тристороннє порівняння"
 
 #: ../data/xdiff-ext.desktop.in.h:1
 msgid "Configure xdiff-ext thunar extension"
@@ -67,11 +67,11 @@ msgstr ""
 
 #: ../setup/src/callbacks.c:47
 msgid "xdiff-ext setup"
-msgstr ""
+msgstr "Налаштування xdiff-ext"
 
 #: ../setup/src/callbacks.c:48
 msgid "(c) 2008 Sergey Zorin. All rights reserved."
-msgstr ""
+msgstr "(c) 2007 Сергій Зорін. Всі права захищені."
 
 #: ../setup/src/callbacks.c:49
 msgid ""
@@ -112,29 +112,24 @@ msgid "Xdiff-ext Setup"
 msgstr ""
 
 #: ../setup/src/interface.c:78 ../setup/src/setup.glade.h:2
-#, fuzzy
 msgid "Compare command:"
-msgstr "Сравнить позже"
+msgstr "Комада порівняння:"
 
 #: ../setup/src/interface.c:86 ../setup/src/setup.glade.h:5
-#, fuzzy
 msgid "Select file comparison tool"
-msgstr "Выбрать файл для последующего сравнения"
+msgstr "Виберіть команду порівняння файлу"
 
 #: ../setup/src/interface.c:91 ../setup/src/setup.glade.h:1
-#, fuzzy
 msgid "3-way compare command:"
-msgstr "Трех-стороннее сравнение с '%s'"
+msgstr "Комада тристороннього порівняння:"
 
 #: ../setup/src/interface.c:99 ../setup/src/setup.glade.h:4
-#, fuzzy
 msgid "Select 3-way comparison tool"
-msgstr "Выбрать файл для последующего сравнения"
+msgstr "Виберіть команду тристороннього порівняння"
 
 #: ../setup/src/interface.c:109 ../setup/src/setup.glade.h:7
-#, fuzzy
 msgid "_keep files in list after comparison"
-msgstr "Выбрать файл для последующего сравнения"
+msgstr "Залишати файл в списку після порівняння."
 
 #: ../setup/src/interface.c:113 ../setup/src/setup.glade.h:3
 msgid "Enable/disable 3-way compare"
