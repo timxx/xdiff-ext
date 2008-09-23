@@ -3,33 +3,36 @@
 # This file is distributed under the same license as the xdiff-ext package.
 # Sergey Zorin<szorin@comcast.net>, 2008.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.2.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-17 10:39-0400\n"
-"PO-Revision-Date: 2008-09-17 10:33+EST\n"
-"Last-Translator: Sergey Zorin<szorin@comcast.net>\n"
+"PO-Revision-Date: 2008-09-23 19:16-0500\n"
+"Last-Translator: Sergey Zorin <szorin@comcast.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../diff-ext/src/main.c:281 ../diff-ext/src/main.c:464
+#: ../diff-ext/src/main.c:281
+#: ../diff-ext/src/main.c:464
 msgid "Compare later"
 msgstr "Сравнить позже"
 
-#: ../diff-ext/src/main.c:281 ../diff-ext/src/main.c:464
+#: ../diff-ext/src/main.c:281
+#: ../diff-ext/src/main.c:464
 msgid "Select file for comparison"
 msgstr "Выбрать файл для последующего сравнения"
 
-#: ../diff-ext/src/main.c:303 ../diff-ext/src/main.c:481
+#: ../diff-ext/src/main.c:303
+#: ../diff-ext/src/main.c:481
 #, c-format
 msgid "Compare to '%s'"
 msgstr "Сравнить с '%s'"
 
-#: ../diff-ext/src/main.c:304 ../diff-ext/src/main.c:345
+#: ../diff-ext/src/main.c:304
+#: ../diff-ext/src/main.c:345
 #: ../diff-ext/src/main.c:482
 #, c-format
 msgid "Compare '%s' and '%s'"
@@ -39,7 +42,8 @@ msgstr "Сравнить '%s' и '%s"
 msgid "Compare"
 msgstr "Сравнить"
 
-#: ../diff-ext/src/main.c:370 ../diff-ext/src/main.c:440
+#: ../diff-ext/src/main.c:370
+#: ../diff-ext/src/main.c:440
 msgid "Compare selected files"
 msgstr "Сравнить выбранные файлы"
 
@@ -48,7 +52,8 @@ msgstr "Сравнить выбранные файлы"
 msgid "3-way compare to '%s'"
 msgstr "Трех-стороннее сравнение с '%s'"
 
-#: ../diff-ext/src/main.c:394 ../diff-ext/src/main.c:413
+#: ../diff-ext/src/main.c:394
+#: ../diff-ext/src/main.c:413
 #, c-format
 msgid "3-way compare '%s', '%s' and '%s'"
 msgstr "Трех-стороннее сравнение '%s', '%s' и '%s'"
@@ -59,19 +64,19 @@ msgstr "Трех-стороннее сравнение"
 
 #: ../data/xdiff-ext.desktop.in.h:1
 msgid "Configure xdiff-ext thunar extension"
-msgstr ""
+msgstr "Конфигурация xdiff-ext"
 
 #: ../data/xdiff-ext.desktop.in.h:2
 msgid "xdiff-ext configuration"
-msgstr ""
+msgstr "Конфигурация xdiff-ext"
 
 #: ../setup/src/callbacks.c:47
 msgid "xdiff-ext setup"
-msgstr ""
+msgstr "Установки xdiff-ext"
 
 #: ../setup/src/callbacks.c:48
 msgid "(c) 2008 Sergey Zorin. All rights reserved."
-msgstr ""
+msgstr "(c) 2008 Сергей Зорин. Все права защищены."
 
 #: ../setup/src/callbacks.c:49
 msgid ""
@@ -90,8 +95,7 @@ msgid ""
 "      provided with the distribution.\n"
 "\n"
 "THIS SOFTWARE  IS  PROVIDED  BY  THE  COPYRIGHT  HOLDERS  AND  CONTRIBUTORS\n"
-"\"AS IS\" AND ANY EXPRESS OR IMPLIED  WARRANTIES, INCLUDING,  BUT NOT "
-"LIMITED\n"
+"\"AS IS\" AND ANY EXPRESS OR IMPLIED  WARRANTIES, INCLUDING,  BUT NOT LIMITED\n"
 "TO, THE IMPLIED WARRANTIES  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\n"
 "PURPOSE  ARE  DISCLAIMED.  IN  NO  EVENT  SHALL  THE  COPYRIGHT   OWNER  OR\n"
 "CONTRIBUTORS  BE  LIABLE  FOR  ANY DIRECT,  INDIRECT, INCIDENTAL,  SPECIAL,\n"
@@ -102,45 +106,75 @@ msgid ""
 "OTHERWISE) ARISING  IN  ANY WAY OUT OF THE USE  OF THIS  SOFTWARE,  EVEN IF\n"
 "ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
 msgstr ""
+"Copyright (c) 2008 Сергей Зорин\n"
+"Все права защищены.\n"
+"\n"
+"Распространение и использование исходных и 'скомпилированных' форм\n"
+" с модификацией или без оной, разрешены при соблюдении следующих\n"
+"соглашений:\n"
+"   1. Распространяемые копии исходного кода должны сохранять\n"
+"      вышеупомянутые объявления copyright, этот список положений и\n"
+"      сохранять следующий отказ от прав.\n"
+"   2. Распространяемые копии скомпилированных форм должны повторять\n"
+"      вышеупомянутые объявления copyright, этот список положений и\n"
+"      следующий отказ в документации и/или других материалах,\n"
+"      поставляемых с дистрибьюцией.\n"
+"\n"
+"ЭТОТ   ПРОГРАМНЫЙ  ПРОДУКТ   ПОСТАВЛЯЕТСЯ   ВЛАДЕЛЬЦЕМ  АВТОРСКИХ   ПРАВ  И\n"
+"ЖЕРТВОВАТЕЛЯМИ  \"КАК ЕСТЬ\"  И ЛЮБЫЕ ЯВНЫЕ ИЛИ НЕЯВНЫЕ ГАРАНТИИ, ВКЛЮЧАЯ, НО\n"
+"НЕ ОГРАНИЧИВАЯСЬ  НЕЯВНЫМИ ГАРАНТИЯМИ, КОММЕРЧЕСКОЙ ЦЕННОСТИ  И ПРИГОДНОСТИ\n"
+"ДЛЯ КОНКРЕТНОЙ ЦЕЛИ ОТРИЦАЮТСЯ. НИ В КОЕМ СЛУЧАЕ  ВЛАДЕЛЕЦ  АВТОРСКИХ  ПРАВ\n"
+"И ЖЕРТВОВАТЕЛИ НЕ ДОЛЖНЫ  БЫТЬ  ОТВЕТСТВЕННЫМИ  ЗА ЛЮБОЙ ПРЯМОЙ, КОСВЕННЫЙ,\n"
+"СЛУЧАЙНЫЙ, СПЕЦИАЛЬНЫЙ, ОБРАЗЦОВЫЙ  ИЛИ  ПОСЛЕДУЮЩИЙ УЩЕРБЫ (ВКЛЮЧАЯ, НО НЕ\n"
+"ОГРАНИЧИВАЯСЬ  ПОСТАВКОЙ  ТОВАРОВ  ЗАМЕНЫ  ИЛИ  УСЛУГ; ПОТЕРЮ ДАННЫХ ИЛИ ИХ\n"
+"НЕПРАВИЛЬНУЮ ПЕРЕДАЧУ ИЛИ ПОТЕРИ; ПРИОСТАНОВЛЕНИЕ БИЗНЕСА), И  ТЕМ НЕ МЕНЕЕ\n"
+"ВЫЗВАННЫЕ  И  В  ЛЮБОЙ  ТЕОРИИ  ОТВЕТСТВЕННОСТИ,  НЕЗАВИСИМО ОТ КОНТРАКТНОЙ,\n"
+"СТРОГОЙ  ОТВЕТСТВЕННОСТИ, ИЛИ  ПРАВОНАРУШЕНИИ  (ВКЛЮЧАЯ ХАЛАТНОСТЬ ИЛИ ИНЫМ\n"
+"СПОСОБОМ),  ВОЗНИКШЕМ  ЛЮБЫМ  ПУТЕМ  ПРИ  ИСПОЛЬЗОВАНИИ  ЭТОГО ПРОГРАММНОГО\n"
+"ОБЕСПЕЧЕНИЯ, ДАЖЕ ЕСЛИ БЫ БЫЛО СООБЩЕНО О ВОЗМОЖНОСТИ ТАКОГО УЩЕРБА.\n"
 
 #: ../setup/src/callbacks.c:51
 msgid "xdiff-ext"
 msgstr ""
 
-#: ../setup/src/interface.c:58 ../setup/src/setup.glade.h:6
+#: ../setup/src/interface.c:58
+#: ../setup/src/setup.glade.h:6
 msgid "Xdiff-ext Setup"
-msgstr ""
+msgstr "Установки xdiff-ext"
 
-#: ../setup/src/interface.c:78 ../setup/src/setup.glade.h:2
-#, fuzzy
+#: ../setup/src/interface.c:78
+#: ../setup/src/setup.glade.h:2
 msgid "Compare command:"
-msgstr "Сравнить позже"
+msgstr "Команда стравнения"
 
-#: ../setup/src/interface.c:86 ../setup/src/setup.glade.h:5
-#, fuzzy
+#: ../setup/src/interface.c:86
+#: ../setup/src/setup.glade.h:5
 msgid "Select file comparison tool"
-msgstr "Выбрать файл для последующего сравнения"
+msgstr "Выбирете команду сравнения"
 
-#: ../setup/src/interface.c:91 ../setup/src/setup.glade.h:1
-#, fuzzy
+#: ../setup/src/interface.c:91
+#: ../setup/src/setup.glade.h:1
 msgid "3-way compare command:"
-msgstr "Трех-стороннее сравнение с '%s'"
+msgstr "Команда 3-х стороннего сравнения"
 
-#: ../setup/src/interface.c:99 ../setup/src/setup.glade.h:4
-#, fuzzy
+#: ../setup/src/interface.c:99
+#: ../setup/src/setup.glade.h:4
 msgid "Select 3-way comparison tool"
-msgstr "Выбрать файл для последующего сравнения"
+msgstr "Выбирете команду 3-х стороннего сравнения"
 
-#: ../setup/src/interface.c:109 ../setup/src/setup.glade.h:7
-#, fuzzy
+#: ../setup/src/interface.c:109
+#: ../setup/src/setup.glade.h:7
 msgid "_keep files in list after comparison"
-msgstr "Выбрать файл для последующего сравнения"
+msgstr "Оставлять файл в списке после сравнения"
 
-#: ../setup/src/interface.c:113 ../setup/src/setup.glade.h:3
+#: ../setup/src/interface.c:113
+#: ../setup/src/setup.glade.h:3
 msgid "Enable/disable 3-way compare"
-msgstr ""
+msgstr "Включить/выключить 3-х стороннее сравнение"
 
-#: ../setup/src/support.c:90 ../setup/src/support.c:114
+#: ../setup/src/support.c:90
+#: ../setup/src/support.c:114
 #, c-format
 msgid "Couldn't find pixmap file: %s"
-msgstr ""
+msgstr "Не могу найти файл картинки: %s"
+
