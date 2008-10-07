@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the xdiff-ext package.
 # Sergey Zorin<szorin@comcast.net>, 2008.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-17 10:41-0400\n"
+"POT-Creation-Date: 2008-10-06 17:54-0400\n"
 "PO-Revision-Date: 2008-09-17 10:24+EST\n"
 "Last-Translator: Sergey Zorin<szorin@comcast.net>\n"
 "Language-Team: \n"
@@ -16,44 +15,61 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../diff-ext/src/main.c:281 ../diff-ext/src/main.c:464
+#: ../diff-ext/src/main.c:293 ../diff-ext/src/main.c:476
 msgid "Compare later"
 msgstr "Порівняти пізніше"
 
-#: ../diff-ext/src/main.c:281 ../diff-ext/src/main.c:464
+#: ../diff-ext/src/main.c:293 ../diff-ext/src/main.c:476
 msgid "Select file for comparison"
 msgstr "Запам'ятати файл(и) для подальшого порівняння."
 
-#: ../diff-ext/src/main.c:303 ../diff-ext/src/main.c:481
+#: ../diff-ext/src/main.c:315 ../diff-ext/src/main.c:493
 #, c-format
 msgid "Compare to '%s'"
 msgstr "Порівняти з '%s'"
 
-#: ../diff-ext/src/main.c:304 ../diff-ext/src/main.c:345
-#: ../diff-ext/src/main.c:482
+#: ../diff-ext/src/main.c:316 ../diff-ext/src/main.c:357
+#: ../diff-ext/src/main.c:494
 #, c-format
 msgid "Compare '%s' and '%s'"
 msgstr "Порівняти '%s' з '%s"
 
-#: ../diff-ext/src/main.c:370
+#: ../diff-ext/src/main.c:340
+msgid "Compare to"
+msgstr "Порівняти з"
+
+#: ../diff-ext/src/main.c:371 ../diff-ext/src/main.c:439
+msgid "Clear"
+msgstr ""
+
+#: ../diff-ext/src/main.c:371 ../diff-ext/src/main.c:439
+#, fuzzy
+msgid "Clear selected files list"
+msgstr "Порівняти вибрані файли."
+
+#: ../diff-ext/src/main.c:382
 msgid "Compare"
 msgstr "Порівняти"
 
-#: ../diff-ext/src/main.c:370 ../diff-ext/src/main.c:440
+#: ../diff-ext/src/main.c:382 ../diff-ext/src/main.c:452
 msgid "Compare selected files"
 msgstr "Порівняти вибрані файли."
 
-#: ../diff-ext/src/main.c:393
+#: ../diff-ext/src/main.c:405
 #, c-format
 msgid "3-way compare to '%s'"
 msgstr "Тристороннє порівняння з '%s'"
 
-#: ../diff-ext/src/main.c:394 ../diff-ext/src/main.c:413
+#: ../diff-ext/src/main.c:406 ../diff-ext/src/main.c:425
 #, c-format
 msgid "3-way compare '%s', '%s' and '%s'"
 msgstr "Тристороннє порівняння '%s', '%s'  і '%s'"
 
-#: ../diff-ext/src/main.c:440
+#: ../diff-ext/src/main.c:419
+msgid "3-way compare to"
+msgstr "Тристороннє порівняння з"
+
+#: ../diff-ext/src/main.c:452
 msgid "3-way Compare"
 msgstr "Тристороннє порівняння"
 
@@ -63,6 +79,11 @@ msgstr ""
 
 #: ../data/xdiff-ext.desktop.in.h:2
 msgid "xdiff-ext configuration"
+msgstr ""
+
+#. TRANSLATORS: Replace this string with your names, one name per line.
+#: ../setup/src/callbacks.c:40
+msgid "Sergey Zorin <szorin@comcast.net>"
 msgstr ""
 
 #: ../setup/src/callbacks.c:47

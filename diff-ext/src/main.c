@@ -337,7 +337,7 @@ get_file_actions(ThunarxMenuProvider* provider, GtkWidget* window, GList* files)
             GString* name = g_string_new("");
             int n = 1;
             
-            submenu = xdiff_ext_submenu_action_new("xdiff-ext::compare_to_menu", "Compare to", "", NULL);
+            submenu = xdiff_ext_submenu_action_new("xdiff-ext::compare_to_menu", _("Compare to"), "", NULL);
             actions = g_list_append(actions, submenu);
 
             while(head) {
@@ -368,7 +368,7 @@ get_file_actions(ThunarxMenuProvider* provider, GtkWidget* window, GList* files)
             
             xdiff_ext_submenu_action_add(submenu, NULL);
             
-            action = gtk_action_new("xdiff-ext::clear", "Clear", "Clear selected files list", GTK_STOCK_CLEAR);
+            action = gtk_action_new("xdiff-ext::clear", _("Clear"), _("Clear selected files list"), GTK_STOCK_CLEAR);
             g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(clear), window);
             xdiff_ext_submenu_action_add(submenu, action);
             
@@ -416,7 +416,7 @@ get_file_actions(ThunarxMenuProvider* provider, GtkWidget* window, GList* files)
               GString* name = g_string_new("");
               int n = 1;
               
-              submenu = xdiff_ext_submenu_action_new("xdiff-ext::compare_to_menu", "3-way compare to", "", NULL);
+              submenu = xdiff_ext_submenu_action_new("xdiff-ext::compare_to_menu", _("3-way compare to"), "", NULL);
               actions = g_list_append(actions, submenu);
 
               while(head) {
@@ -436,7 +436,7 @@ get_file_actions(ThunarxMenuProvider* provider, GtkWidget* window, GList* files)
               
               xdiff_ext_submenu_action_add(submenu, NULL);
               
-              action = gtk_action_new("xdiff-ext::clear", "Clear", "Clear selected files list", NULL);
+              action = gtk_action_new("xdiff-ext::clear", _("Clear"), _("Clear selected files list"), NULL);
               g_signal_connect(G_OBJECT(action), "activate", G_CALLBACK(clear), window);
               xdiff_ext_submenu_action_add(submenu, action);
               

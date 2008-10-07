@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-18 18:51-0400\n"
+"POT-Creation-Date: 2008-10-06 17:55-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,6 +35,18 @@ msgstr ""
 msgid "Compare '%s' and '%s'"
 msgstr ""
 
+#: ../diff-ext/src/main.c:340
+msgid "Compare to"
+msgstr ""
+
+#: ../diff-ext/src/main.c:371 ../diff-ext/src/main.c:439
+msgid "Clear"
+msgstr ""
+
+#: ../diff-ext/src/main.c:371 ../diff-ext/src/main.c:439
+msgid "Clear selected files list"
+msgstr ""
+
 #: ../diff-ext/src/main.c:382
 msgid "Compare"
 msgstr ""
@@ -53,6 +65,10 @@ msgstr ""
 msgid "3-way compare '%s', '%s' and '%s'"
 msgstr ""
 
+#: ../diff-ext/src/main.c:419
+msgid "3-way compare to"
+msgstr ""
+
 #: ../diff-ext/src/main.c:452
 msgid "3-way Compare"
 msgstr ""
@@ -63,6 +79,11 @@ msgstr ""
 
 #: ../data/xdiff-ext.desktop.in.h:2
 msgid "xdiff-ext configuration"
+msgstr ""
+
+#. TRANSLATORS: Replace this string with your names, one name per line.
+#: ../setup/src/callbacks.c:40
+msgid "Sergey Zorin <szorin@comcast.net>"
 msgstr ""
 
 #: ../setup/src/callbacks.c:47

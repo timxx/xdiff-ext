@@ -37,7 +37,7 @@ on_about_clicked(GtkButton* button, gpointer user_data) {
   };
   
   /* TRANSLATORS: Replace this string with your names, one name per line. */
-  gchar *translators = "Sergey Zorin <szorin@comcast.net>";
+  gchar *translators = _("Sergey Zorin <szorin@comcast.net>");
   GdkPixbuf *about_logo_pixbuf;
 
   about = gtk_about_dialog_new();
