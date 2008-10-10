@@ -1,76 +1,76 @@
-# Ukrainian translation for xdiff-ext.
-# Copyright (C) 2008 Sergey Zorin
-# This file is distributed under the same license as the xdiff-ext package.
-# Sergey Zorin<szorin@comcast.net>, 2008.
+# French translation for kdiff-ext
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the kdiff-ext package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.2.1\n"
+"Project-Id-Version: kdiff-ext\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 20:01-0400\n"
-"PO-Revision-Date: 2008-09-17 10:24+EST\n"
-"Last-Translator: Sergey Zorin<szorin@comcast.net>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2008-10-08 19:59-0400\n"
+"PO-Revision-Date: 2008-08-30 11:34+0000\n"
+"Last-Translator: Frandeboeuf Nicolas <nicofrand@gmail.com>\n"
+"Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-09-17 03:08+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../diff-ext/src/main.c:293 ../diff-ext/src/main.c:476
+#, fuzzy
 msgid "Compare later"
-msgstr "Порівняти пізніше"
+msgstr "Comparer plus tard"
 
 #: ../diff-ext/src/main.c:293 ../diff-ext/src/main.c:476
 msgid "Select file for comparison"
-msgstr "Запам'ятати файл(и) для подальшого порівняння."
+msgstr ""
 
 #: ../diff-ext/src/main.c:315 ../diff-ext/src/main.c:493
-#, c-format
+#, fuzzy, c-format
 msgid "Compare to '%s'"
-msgstr "Порівняти з '%s'"
+msgstr "Comparer à '%s'"
 
 #: ../diff-ext/src/main.c:316 ../diff-ext/src/main.c:357
 #: ../diff-ext/src/main.c:494
-#, c-format
 msgid "Compare '%s' and '%s'"
-msgstr "Порівняти '%s' з '%s"
+msgstr ""
 
 #: ../diff-ext/src/main.c:340
 msgid "Compare to"
-msgstr "Порівняти з"
+msgstr "Comparer à"
 
 #: ../diff-ext/src/main.c:371 ../diff-ext/src/main.c:439
 msgid "Clear"
-msgstr "Очистити"
+msgstr ""
 
 #: ../diff-ext/src/main.c:371 ../diff-ext/src/main.c:439
 msgid "Clear selected files list"
-msgstr "Очистити список файлів, що запам'ятали."
+msgstr ""
 
 #: ../diff-ext/src/main.c:382
 msgid "Compare"
-msgstr "Порівняти"
+msgstr "Comparer"
 
 #: ../diff-ext/src/main.c:382 ../diff-ext/src/main.c:452
 msgid "Compare selected files"
-msgstr "Порівняти вибрані файли."
+msgstr ""
 
 #: ../diff-ext/src/main.c:405
-#, c-format
 msgid "3-way compare to '%s'"
-msgstr "Тристороннє порівняння з '%s'"
+msgstr "Comparaison 3-way avec '%s'"
 
 #: ../diff-ext/src/main.c:406 ../diff-ext/src/main.c:425
-#, c-format
 msgid "3-way compare '%s', '%s' and '%s'"
-msgstr "Тристороннє порівняння '%s', '%s'  і '%s'"
+msgstr ""
 
 #: ../diff-ext/src/main.c:419
 msgid "3-way compare to"
-msgstr "Тристороннє порівняння з"
+msgstr "Comparaison 3-way avec"
 
 #: ../diff-ext/src/main.c:452
 msgid "3-way Compare"
-msgstr "Тристороннє порівняння"
+msgstr "Comparaison 3-way"
 
 #: ../data/xdiff-ext.desktop.in.h:1
 msgid "Configure xdiff-ext thunar extension"
@@ -83,17 +83,18 @@ msgstr ""
 #. TRANSLATORS: Replace this string with your names, one name per line.
 #: ../setup/src/callbacks.c:40
 msgid "Sergey Zorin <szorin@comcast.net>"
-msgstr ""
+msgstr "Anthony Guéchoum,Olotiar"
 
 #: ../setup/src/callbacks.c:47
 msgid "xdiff-ext setup"
-msgstr "Налаштування xdiff-ext"
+msgstr ""
 
 #: ../setup/src/callbacks.c:48
 msgid "(c) 2008 Sergey Zorin. All rights reserved."
-msgstr "(c) 2007 Сергій Зорін. Всі права захищені."
+msgstr "(c) 2008 Sergey Zorin. Tous droits réservés."
 
 #: ../setup/src/callbacks.c:49
+#, fuzzy
 msgid ""
 "Copyright (c) 2008, Sergey Zorin\n"
 "All rights reserved.\n"
@@ -122,6 +123,18 @@ msgid ""
 "OTHERWISE) ARISING  IN  ANY WAY OUT OF THE USE  OF THIS  SOFTWARE,  EVEN IF\n"
 "ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
 msgstr ""
+"Copyright (c) 2008 Sergey Zorin\n"
+"Tous droit réservés.\n"
+"L'utilisation et la redistribution des sources et des fichiers\n"
+"binaires, avec ou sans modifications, est autorisée mais nécessite\n"
+"le respect des conditions suivantes :\n"
+"   1. Les redistributions des fichiers sources doivent conserver \n"
+"      la notice de copyright, cette présente liste de conditions, et les \n"
+"      conditions d'usage suivantes.\n"
+"   2. Les redistributions des fichiers binaires doivent reproduire\n"
+"      la notice de copyright, cette présente liste de conditions, et les\n"
+"      conditions d'usage suivantes dans la documentation et/ou tout autre\n"
+"      materiel fourni avec la distribution.\n"
 
 #: ../setup/src/callbacks.c:51
 msgid "xdiff-ext"
@@ -133,29 +146,28 @@ msgstr ""
 
 #: ../setup/src/interface.c:78 ../setup/src/setup.glade.h:2
 msgid "Compare command:"
-msgstr "Комада порівняння:"
+msgstr ""
 
 #: ../setup/src/interface.c:86 ../setup/src/setup.glade.h:5
 msgid "Select file comparison tool"
-msgstr "Виберіть команду порівняння файлу"
+msgstr ""
 
 #: ../setup/src/interface.c:91 ../setup/src/setup.glade.h:1
 msgid "3-way compare command:"
-msgstr "Комада тристороннього порівняння:"
+msgstr ""
 
 #: ../setup/src/interface.c:99 ../setup/src/setup.glade.h:4
 msgid "Select 3-way comparison tool"
-msgstr "Виберіть команду тристороннього порівняння"
+msgstr ""
 
 #: ../setup/src/interface.c:109 ../setup/src/setup.glade.h:7
 msgid "_keep files in list after comparison"
-msgstr "Залишати файл в списку після порівняння."
+msgstr ""
 
 #: ../setup/src/interface.c:113 ../setup/src/setup.glade.h:3
 msgid "Enable/disable 3-way compare"
 msgstr ""
 
 #: ../setup/src/support.c:90 ../setup/src/support.c:114
-#, c-format
 msgid "Couldn't find pixmap file: %s"
 msgstr ""

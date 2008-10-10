@@ -36,7 +36,7 @@ GETTEXT_PACKAGE=xdiff-ext
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 
-ALL_LINGUAS="ru uk"
+ALL_LINGUAS="da de es fr it nb pl pt pt_BR ru uk"
 AM_GLIB_GNU_GETTEXT
 
 diff_extlocaledir='${prefix}/${DATADIRNAME}/locale'
