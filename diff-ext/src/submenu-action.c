@@ -28,7 +28,7 @@ static void submenu_action_class_init(xdiff_ext_submenu_action_class* klass);
 static GObjectClass* parent_class = NULL;
 
 GType
-xdiff_ext_submenu_action_get_type () {
+xdiff_ext_submenu_action_get_type() {
   static GType type = 0;
 
   if(G_UNLIKELY(type == 0)) {
@@ -36,16 +36,16 @@ xdiff_ext_submenu_action_get_type () {
       sizeof (xdiff_ext_submenu_action_class),
       NULL, /* base_init */
       NULL, /* base_finalize */
-      (GClassInitFunc) submenu_action_class_init,
+      (GClassInitFunc)submenu_action_class_init,
       NULL,
       NULL, /* class_data */
-      sizeof (xdiff_ext_submenu_action),
+      sizeof(xdiff_ext_submenu_action),
       0, /* n_preallocs */
       (GInstanceInitFunc)submenu_action_init,
       NULL,
     };
 
-    type = g_type_register_static (GTK_TYPE_ACTION, "xdiff_ext_submenu_action", &our_info, 0);
+    type = g_type_register_static(GTK_TYPE_ACTION, "xdiff_ext_submenu_action", &our_info, 0);
   }
 
   return type;
@@ -61,8 +61,13 @@ xdiff_ext_submenu_action_new(const gchar *name, const gchar *label, const gchar 
                          "tooltip", tooltip,
                          "stock_id", stock_id,
                          NULL);
-  
+
   return action;
+}
+
+void 
+xdiff_ext_submenu_action_set_icon_name(xdiff_ext_submenu_action* action, const gchar *icon_name) {
+  gtk_action_set_icon_name(&(action->parent), icon_name);
 }
 
 void 
@@ -71,7 +76,7 @@ xdiff_ext_submenu_action_add(xdiff_ext_submenu_action* action, GtkAction* subact
 }
 
 static GtkWidget *
-create_menu_item (GtkAction* action) {
+create_menu_item(GtkAction* action) {
   GtkWidget* menu;
   GtkWidget* menu_item;
   GList* actions = XDIFF_EXT_SUBMENU_ACTION(action)->actions;
@@ -106,13 +111,10 @@ create_menu_item (GtkAction* action) {
 }
 
 static void
-submenu_action_class_init (xdiff_ext_submenu_action_class* klass) {
-  GtkActionClass* action_class = GTK_ACTION_CLASS (klass);
-  GObjectClass* gobject_class;
+submenu_action_class_init(xdiff_ext_submenu_action_class* klass) {
+  GtkActionClass* action_class = GTK_ACTION_CLASS(klass);
 
-  gobject_class = G_OBJECT_CLASS (klass);
-
-  parent_class = g_type_class_peek_parent (klass);
+  parent_class = g_type_class_peek_parent(klass);
 
   action_class->menu_item_type = GTK_TYPE_IMAGE_MENU_ITEM;
   action_class->create_menu_item = create_menu_item;

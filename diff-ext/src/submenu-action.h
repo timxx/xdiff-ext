@@ -17,6 +17,7 @@ typedef struct _xdiff_ext_submenu_action_class	xdiff_ext_submenu_action_class;
 
 xdiff_ext_submenu_action* xdiff_ext_submenu_action_new(const gchar* name, const gchar* label, const gchar* tooltip, const gchar* stock_id);
 void xdiff_ext_submenu_action_add(xdiff_ext_submenu_action* action, GtkAction* sub_action);
+void xdiff_ext_submenu_action_set_icon_name(xdiff_ext_submenu_action* action, const gchar* icon_name);
 
 GType	xdiff_ext_submenu_action_get_type();
 
