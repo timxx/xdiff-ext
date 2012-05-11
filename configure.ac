@@ -11,14 +11,14 @@ AC_PROG_INSTALL
 AC_PROG_INTLTOOL()
 AC_PROG_LIBTOOL
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AM_GCONF_SOURCE_2
+#AM_GCONF_SOURCE_2
 
-pkg_modules="thunar-vfs-1 >= 0.9 gtk+-2.0 >= 2.0.0"
+pkg_modules="gtk+-2.0 >= 2.0.0 exo-1 >= 0.3.4"
 PKG_CHECK_MODULES(PREFERENCES, [$pkg_modules])
 AC_SUBST(PREFERENCES_CFLAGS)
 AC_SUBST(PREFERENCES_LIBS)
 
-pkg_modules="thunar-vfs-1 >= 0.9 thunarx-1 >= 0.9 exo-0.3 >= 0.3.4 gtk+-2.0 >= 2.0.0"
+pkg_modules="thunarx-2 >= 0.9 exo-1 >= 0.3.4 gtk+-2.0 >= 2.0.0"
 PKG_CHECK_MODULES(DIFF_EXT, [$pkg_modules])
 AC_SUBST(DIFF_EXT_CFLAGS)
 AC_SUBST(DIFF_EXT_LIBS)
@@ -28,7 +28,7 @@ PKG_CHECK_MODULES(SETUP, [$pkg_modules])
 AC_SUBST(SETUP_CFLAGS)
 AC_SUBST(SETUP_LIBS)
 
-_PKG_CONFIG(EXTENSIONS_DIR,[variable=extensionsdir], [thunarx-1])
+_PKG_CONFIG(EXTENSIONS_DIR,[variable=extensionsdir], [thunarx-2])
 AC_ARG_VAR(EXTENSIONS_DIR)
 libdir=$pkg_cv_EXTENSIONS_DIR
 

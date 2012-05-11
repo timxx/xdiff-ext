@@ -18,7 +18,7 @@
 #include <string.h>
 #endif
 
-#include <thunar-vfs/thunar-vfs.h>
+#include <exo/exo.h>
 
 #include <preferences.h>
 
@@ -45,12 +45,7 @@ static void xdiff_ext_preferences_set_property(GObject* object, guint prop_id, c
 
 static void xdiff_ext_preferences_resume_monitor(xdiff_ext_preferences* preferences);
 static void xdiff_ext_preferences_suspend_monitor(xdiff_ext_preferences* preferences);
-static void xdiff_ext_preferences_monitor(ThunarVfsMonitor* monitor, 
-                                          ThunarVfsMonitorHandle* handle,
-                                          ThunarVfsMonitorEvent event,
-                                          ThunarVfsPath* handle_path,
-                                          ThunarVfsPath* event_path,
-                                          gpointer user_data);
+
 static void xdiff_ext_preferences_queue_load(xdiff_ext_preferences* preferences);
 static void xdiff_ext_preferences_queue_store(xdiff_ext_preferences* preferences);
 static void xdiff_ext_preferences_load_idle_destroy(gpointer user_data);
@@ -63,9 +58,6 @@ struct _xdiff_ext_preferences_class {
 
 struct _xdiff_ext_preferences {
   GObject __parent__;
-
-  ThunarVfsMonitorHandle* handle;
-  ThunarVfsMonitor* monitor;
 
   GValue values[N_PROPERTIES];
 
@@ -165,9 +157,6 @@ xdiff_ext_preferences_class_init(xdiff_ext_preferences_class* klass) {
 
 static void
 xdiff_ext_preferences_init(xdiff_ext_preferences* preferences) {
-  /* grab a reference on the VFS monitor */
-  preferences->monitor = thunar_vfs_monitor_get_default();
-
   /* load the settings */
   xdiff_ext_preferences_load(preferences);
 
@@ -191,12 +180,6 @@ xdiff_ext_preferences_finalize(GObject* object) {
   /* stop any pending load idle source */
   if(G_UNLIKELY(preferences->load_idle_id != 0)) {
     g_source_remove(preferences->load_idle_id);
-  }
-
-  /* stop the file monitor */
-  if(G_LIKELY(preferences->monitor != NULL)) {
-    xdiff_ext_preferences_suspend_monitor(preferences);
-    g_object_unref(G_OBJECT(preferences->monitor));
   }
 
   /* release the property values */
@@ -247,62 +230,13 @@ xdiff_ext_preferences_set_property(GObject* object, guint prop_id, const GValue*
 
 static void
 xdiff_ext_preferences_resume_monitor(xdiff_ext_preferences* preferences) {
-  ThunarVfsPath* path;
-  gchar* filename;
-
-  /* verify that the monitor is suspended */
-  if(G_LIKELY(preferences->handle == NULL)) {
-    /* determine the save location for thunarrc to monitor */
-    filename = xfce_resource_save_location(XFCE_RESOURCE_CONFIG, RC_PATH, TRUE);
-    if(G_LIKELY(filename != NULL)) {
-      /* determine the VFS path for the filename */
-      path = thunar_vfs_path_new(filename, NULL);
-      if(G_LIKELY(path != NULL)) {
-        /* add the monitor handle for the file */
-        preferences->handle = thunar_vfs_monitor_add_file(preferences->monitor, path, xdiff_ext_preferences_monitor, preferences);
-        thunar_vfs_path_unref(path);
-      }
-
-      /* release the filename */
-      g_free(filename);
-    }
-  }
 }
 
 
 
 static void
 xdiff_ext_preferences_suspend_monitor(xdiff_ext_preferences* preferences) {
-  /* verify that the monitor is active */
-  if(G_LIKELY(preferences->handle != NULL)) {
-    /* disconnect the handle from the monitor */
-    thunar_vfs_monitor_remove(preferences->monitor, preferences->handle);
-    preferences->handle = NULL;
-  }
 }
-
-
-
-static void
-xdiff_ext_preferences_monitor(ThunarVfsMonitor* monitor,
-                                                ThunarVfsMonitorHandle* handle,
-                                                ThunarVfsMonitorEvent event,
-                                                ThunarVfsPath* handle_path,
-                                                ThunarVfsPath* event_path,
-                                                gpointer user_data) {
-  xdiff_ext_preferences* preferences = XDIFF_EXT_PREFERENCES(user_data);
-
-  g_return_if_fail(XDIFF_EXT_IS_PREFERENCES(preferences));
-  g_return_if_fail(THUNAR_VFS_IS_MONITOR(monitor));
-  g_return_if_fail(preferences->monitor == monitor);
-  g_return_if_fail(preferences->handle == handle);
-
-  /* schedule a reload whenever the file is created/changed */
-  if(event == THUNAR_VFS_MONITOR_EVENT_CHANGED || event == THUNAR_VFS_MONITOR_EVENT_CREATED) {
-    xdiff_ext_preferences_queue_load(preferences);
-  }
-}
-
 
 
 static void
@@ -441,7 +375,6 @@ xdiff_ext_preferences_store(gpointer user_data) {
   if(G_LIKELY(rc != NULL)) {
     /* suspend the monitor(hopefully tricking FAM to avoid unnecessary reloads) */
     xdiff_ext_preferences_suspend_monitor(preferences);
-    g_object_unref(G_OBJECT(preferences->monitor));
 
     xfce_rc_set_group(rc, "Configuration");
 

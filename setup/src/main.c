@@ -37,7 +37,6 @@ main(int argc, char *argv[]) {
 
   gtk_set_locale();
   gtk_init(&argc, &argv);
-  thunar_vfs_init();
   g_type_init();
   if (!g_thread_supported ()) {
     g_thread_init (NULL);
