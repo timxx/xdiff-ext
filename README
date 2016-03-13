@@ -1,0 +1,13 @@
+xdiff-ext
+=========
+
+This shell extension (diff-ext) makes it possible to launch file comparison
+tool for 2 or 3 files (depending on the tool) in the same directory or "save"
+a file(s) for later comparison. It acts as external most recent used (MRU)
+file list for the comparison tool.
+
+This plugin is for Thunar file manager.
+
+This project import from: http://hg.code.sf.net/p/diff-ext/xdiff-ext
+
+The orignal author is Sergey Zorin
