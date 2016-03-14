@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2008-2009, Sergey Zorin. All rights reserved.
+ * Copyright (c) 2016, Weitian Leung. All rights reserved.
  *
  * This software is distributable under the BSD license. See the terms
  * of the BSD license in the COPYING file provided with this software.
@@ -103,7 +104,17 @@ gint
 path_compare(ThunarxFileInfo* a, ThunarxFileInfo* b) {
   gchar* p1 = thunarx_file_info_get_name(a);
   gchar* p2 = thunarx_file_info_get_name(b);
-  gint result = strcmp(p1, p2);
+
+  gint result = -1;
+
+  if (p1 == NULL && p2 == NULL)
+    result = 0;
+  else if (p1 == NULL)
+    result = -1;
+  else if (p2 == NULL)
+    result = 1;
+  else
+    result = strcmp(p1, p2);
 
   g_free(p1);
   g_free(p2);
@@ -510,9 +521,11 @@ get_folder_actions(ThunarxMenuProvider* provider, GtkWidget* window, ThunarxFile
       GString* caption = g_string_new("");
       GString* hint = g_string_new("");
       GList* head = g_queue_peek_head_link(_saved);
-      gchar* head_file = (gchar*)head->data;
-      gchar* uri;
-      gchar* path;
+
+      gchar* uri = thunarx_file_info_get_uri((ThunarxFileInfo*)head->data);
+      gchar* path = g_filename_from_uri(uri, NULL, NULL);
+      gchar* head_file = path;
+      g_free(uri);
 
       uri = thunarx_file_info_get_uri((ThunarxFileInfo*)files->data);
       path = g_filename_from_uri(uri, NULL, NULL);
@@ -520,6 +533,9 @@ get_folder_actions(ThunarxMenuProvider* provider, GtkWidget* window, ThunarxFile
       
       g_string_printf(caption, _("Compare to '%s'"), head_file);
       g_string_printf(hint, _("Compare '%s' and '%s'"), path, head_file);
+
+      g_free(head_file);
+      g_free(path);
       
       action = gtk_action_new("xdiff-ext::compare_to", caption->str, hint->str, NULL);
       gtk_action_set_icon_name(action, "diff_with");
